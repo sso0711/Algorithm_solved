@@ -1,6 +1,107 @@
 # [Silver V] 집합 - 11723 
 
 [문제 링크](https://www.acmicpc.net/problem/11723) 
+풀이 참고 X
+
+# 🪄 문제 탐색하기
+
+
+# 🪄 회차별 수정사항
+## 1회차
+
+arr에는 empty와 all의 경우는 파라미터 x가 없는 길이 1의 배열이 저장되는데,
+for a,b in arr 에서 b에 해당하는 것이 없어 오류가 난다.
+
+```
+import sys
+input = sys.stdin.readline
+
+m = int(input())
+S = set()
+
+arr=[list(input().split()) for _ in range(m)]
+
+for a,b in arr:
+    
+    if a=="add":
+        if b not in S:
+            S.add(b)    
+    elif a=="remove":
+        if b in S:
+            S.remove(b)
+    elif a=="check":
+        if b in S:
+            print(1)
+        else:
+            print(0)
+    elif a=="toggle":
+        if b in S:
+            S.remove(b)
+        else:
+            S.add(b)
+    elif a=="all":
+        S = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20}
+    elif a=="empty":
+        S.clear()
+```
+
+
+
+## 2회차
+
+a,b 대신 for문 내부에서 op[0], op[1]로 바꿔주었다. (op[1]이 있는 경우에만 사용하도록)
+예제 출력과 동일하게 나오지만 메모리 초과.
+
+알고보니 백준에서 입력을 한 번에 받아서 한번에 출력해야만 하는줄 알았는데 한 줄씩 입력받아 처리해도 되는거였다,,
+
+```python
+import sys
+input = sys.stdin.readline
+
+m = int(input())
+S = set()
+
+arr=[list(input().split()) for _ in range(m)]
+
+for op in arr:
+    if len(op) == 2: # 파라미터 x가 있을 경우 int로 변환
+        op[1] = int(op[1])
+        
+    if op[0]=="add":
+        if op[1] not in S:
+            S.add(op[1])    
+    elif op[0]=="remove":
+        if op[1] in S:
+            S.remove(op[1])
+    elif op[0]=="check":
+        if op[1] in S:
+            print(1)
+        else:
+            print(0)
+    elif op[0]=="toggle":
+        if op[1] in S:
+            S.remove(op[1])
+        else:
+            S.add(op[1])
+    elif op[0]=="all":
+        S = set([i for i in range(1,21)])
+    elif op[0]=="empty":
+        S.clear()
+```
+
+## 3회차
+정답
+
+
+# 🪄 새로 알게 된 사실
+
+- set에서 remove는 존재하지 않는 요소를 제거하려고 하면 에러 발생하는데, discard는 그렇지 않다.
+- S=set(range(1,21)) → 1~20의 원소를 가지는 집합 생성
+
+<br>
+<br>
+<br>
+<br>
 
 ### 성능 요약
 
