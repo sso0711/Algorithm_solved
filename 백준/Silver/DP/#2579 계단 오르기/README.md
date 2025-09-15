@@ -22,7 +22,8 @@ DP 카테고리의 문제를 푸는 중이라 DP인 것은 알았으나, 점화�
 
 이 중 더 큰 값을 DP[n]으로 선택해주면 되었다.
 
-![image.png](attachment:4df1e7ce-a222-4c92-9167-e173d3d71ca8:image.png)
+<img width="591" height="500" alt="image" src="https://github.com/user-attachments/assets/bc8e454e-9005-4cd7-ae35-ac33532a50a9" />
+
 
 - 여기서 전전칸에서 올라온 경우는 stair[n] + DP[n-2] 인 건 알겠는데, 전 칸에서 올라온 경우는 왜 stair[n] + DP[n-1]이 아닌가?? 라는 의문이 들었다.
 
