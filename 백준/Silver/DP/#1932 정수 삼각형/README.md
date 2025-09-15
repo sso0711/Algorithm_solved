@@ -1,5 +1,78 @@
 # <img width="20px"  src="https://d2gd6pc034wcta.cloudfront.net/tier/10.svg" class="solvedac-tier"> [정수 삼각형](https://www.acmicpc.net/problem/1932) 
 
+풀이참고 X
+
+# 🪄 문제 탐색하기
+
+이전에 푼 RGB 거리와 유사한 풀이를 떠올렸다.
+
+입력으로 주어지는 이차원 배열을 dp배열로 활용하고,
+
+바텀업 방식으로 각 항에 대한 최댓값들을 누적해서 합한 값을 기록한다.
+
+어떤 항에 대해서, 바로 윗줄의 대각선왼쪽 / 대각선오른쪽 이렇게 두 가지 방향에서 내려올 수 있다.
+
+그런데 맨 왼쪽/ 맨 오른쪽의 경우는 항상 대각선왼쪽 또는 대각선오른쪽  둘 중 하나로부터 내려오게 되므로 다음과 같이 케이스를 나눈다.
+
+- 맨 왼쪽일 경우 항상 대각선 오른쪽을 더한다.
+- 맨 오른쪽일 경우 항상 대각선 왼쪽을 더한다.
+- 가운데의 경우 대각선 왼쪽, 대각선 오른쪽 중 더 큰 값을  더한다.
+
+<br>
+
+<br>
+
+# 🪄 회차별 수정사항
+
+## 1회
+
+```python
+import sys
+# sys.setrecursionlimit(10**6)
+input = sys.stdin.readline
+
+n = int(input())
+dp = [list(map(int,input().rstrip().split())) for _ in range(n)]
+
+for i in range(1,n):
+    for j in range(n):
+        if j==0: # 맨 왼쪽일 경우 항상 대각선 오른쪽이 더해짐
+            dp[i][j] += dp[i-1][0]
+        elif j==n-1: # 맨 오른쪽일 경우 항상 대각선 왼쪽이 더해짐
+            dp[i][j] += dp[i-1][n-1]
+        else: # 가운데 경우
+            dp[i][j] += max(dp[i-1][j-1], dp[i-1][j])
+
+print(max(dp[n-1]))
+```
+
+1. 두번째 for문에서 i번째 줄은 길이가 i+1이므로
+
+range(n) → range(i+1)
+
+1. elif문에서 맨 오른쪽일 경우 j==n-1 →  j==i,
+
+dp[i-1][n-1] →dp[i-1][-1]
+
+<br>
+
+<br>
+
+# 🪄 새로 알게 된 사실
+
+<br>
+
+<br>
+
+
+
+
+
+
+
+
+
+
 | 제출 번호 | 닉네임 | 채점 결과 | 메모리 | 시간 | 언어 | 코드 길이 |
 |---|---|---|---|---|---|---|
 |98549390|qkrthdud6755|맞았습니다!! |36504KB|104ms|Python 3|539B|
