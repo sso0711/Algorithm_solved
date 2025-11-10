@@ -11,9 +11,6 @@ class Solution {
             if(cnt > citations[i]){
                 answer = cnt-1;
                 break;
-            } else if(cnt == citations[i]){
-                answer = cnt;
-                break;
             }
             answer = cnt; // 이 부분이 없으면 [5,6,7,8] -> 4 인 테스트케이스를 통과하지 못한다.
                           // for문이 다 끝나도 cnt >= citations[i] 인 경우를 찾지 못하기 때문
