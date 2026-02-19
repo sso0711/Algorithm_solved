@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 
-public class Solution_a형0219 {
+public class a형0219 {
 	
 	static int N, ans;
 
@@ -19,6 +19,8 @@ public class Solution_a형0219 {
 		for(int tcase=1; tcase<=T; tcase++) {
 			N = Integer.parseInt(br.readLine()); // 노드 갯수
 			List<List<Integer>> arr = new ArrayList<>();  // 인접리스트
+			// 원래 위상정렬 문제에서는 방문처리 필요없지만, 이 문제에선 진입차수가 0인 노드의 간선을 하나씩 제거하면서 새롭게 진입차수 0이 되는 노드를 큐에 넣는게 아니라
+			// 모든 노드들을 한번에 제거 후 다시 진입차수 0인 애들을 찾아야 하기 때문에, 이전에 처리한 노드는 제외가 필요했다
 			boolean[] visited = new boolean[N+1];
 			int[] counts = new int[N+1]; // 각 노드들의 진입차수를 저장하는 배열
 			int chk = 0; // 방문처리한 노드 갯수
@@ -43,7 +45,7 @@ public class Solution_a형0219 {
 				for(int j=1; j<=n; j++) {
 					// i번의 선수과목이 ex번이다.
 					ex = Integer.parseInt(st.nextToken());
-					arr.get(i).add(ex);
+					arr.get(ex).add(i);
 				}
 			}
 
@@ -73,12 +75,9 @@ public class Solution_a형0219 {
 				while(!q.isEmpty()) {
 					Integer tmp = q.poll();
 
-					for(int m=1; m<=N; m++) {
-						if(arr.get(m).contains(tmp)) {
-							arr.get(m).remove(tmp);
-							counts[m]--;
-						}
-					}
+					for(int next : arr.get(tmp)){
+				        counts[next]--;
+				    }
 				}
 
 				ans ++;
